@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
-import { SalariesResolver } from './salaries.resolver';
+import { TestResolver } from './salaries.resolver';
 
 @Module({
   imports: [
@@ -20,6 +20,6 @@ import { SalariesResolver } from './salaries.resolver';
       context: ({ req }) => ({ req }),
     }),
   ],
-  providers: [AppService, SalariesResolver],
+  providers: [AppService, TestResolver],
 })
 export class AppModule {}

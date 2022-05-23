@@ -4,6 +4,8 @@ import { ID } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { GraphQLDecimal } from 'prisma-graphql-type-decimal';
 import { Decimal } from '@prisma/client/runtime';
+import { Job } from '../job/job.model';
+import { SalaryCount } from './salary-count.output';
 
 @ObjectType()
 export class Salary {
@@ -25,4 +27,10 @@ export class Salary {
 
     @Field(() => Date, {nullable:false})
     updatedAt!: Date;
+
+    @Field(() => [Job], {nullable:true})
+    job?: Array<Job>;
+
+    @Field(() => SalaryCount, {nullable:false})
+    _count?: SalaryCount;
 }

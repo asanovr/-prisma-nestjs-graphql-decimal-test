@@ -24,17 +24,37 @@ datasource db {
   url      = "mysql://test:test@mysql:3306/test"
 }
 
+model Job {
+  id          Int      @id @default(autoincrement()) @db.UnsignedInt
+  companyId   Int      @db.UnsignedInt
+  title       String
+  salaryId    Int?     @db.UnsignedInt
+  /// @HideField({ match: 'Job@(WhereInput|OrderBy)*' })
+  description String?  @db.Text
+  /// @HideField({ input: true })
+  createdAt   DateTime @default(now())
+  /// @HideField({ input: true })
+  updatedAt   DateTime @updatedAt
+
+  salary Salary? @relation(fields: [salaryId], references: [id], onDelete: Cascade)
+
+
+  @@map("jobs")
+}
+
 model Salary {
-  id         Int            @id @default(autoincrement()) @db.UnsignedInt
-  currencyId Int            @db.UnsignedInt
-  from       Decimal        @db.Decimal(15, 2)
-  to         Decimal        @db.Decimal(15, 2)
+  id         Int      @id @default(autoincrement()) @db.UnsignedInt
+  currencyId Int      @db.UnsignedInt
+  from       Decimal  @db.Decimal(15, 2)
+  to         Decimal  @db.Decimal(15, 2)
   // from       Int            @db.UnsignedInt
   // to         Int            @db.UnsignedInt
   /// @HideField({ input: true })
-  createdAt  DateTime       @default(now())
+  createdAt  DateTime @default(now())
   /// @HideField({ input: true })
-  updatedAt  DateTime       @updatedAt
+  updatedAt  DateTime @updatedAt
+
+  job Job[]
 
   @@map("salaries")
 }

@@ -10,7 +10,60 @@ scalar DateTime
 """An arbitrary-precision Decimal type"""
 scalar Decimal
 
+type Job {
+  companyId: Int!
+  createdAt: DateTime!
+  description: String
+  id: ID!
+  salary: Salary
+  salaryId: Int
+  title: String!
+  updatedAt: DateTime!
+}
+
+input JobCreateInput {
+  companyId: Int!
+  description: String
+  salary: SalaryCreateNestedOneWithoutJobInput
+  title: String!
+}
+
+input JobCreateManySalaryInput {
+  companyId: Int!
+  description: String
+  id: Int
+  title: String!
+}
+
+input JobCreateManySalaryInputEnvelope {
+  data: [JobCreateManySalaryInput!]!
+  skipDuplicates: Boolean
+}
+
+input JobCreateNestedManyWithoutSalaryInput {
+  connect: [JobWhereUniqueInput!]
+  connectOrCreate: [JobCreateOrConnectWithoutSalaryInput!]
+  create: [JobCreateWithoutSalaryInput!]
+  createMany: JobCreateManySalaryInputEnvelope
+}
+
+input JobCreateOrConnectWithoutSalaryInput {
+  create: JobCreateWithoutSalaryInput!
+  where: JobWhereUniqueInput!
+}
+
+input JobCreateWithoutSalaryInput {
+  companyId: Int!
+  description: String
+  title: String!
+}
+
+input JobWhereUniqueInput {
+  id: Int
+}
+
 type Mutation {
+  createJob(input: JobCreateInput!): Job!
   createSalary(input: SalaryCreateInput!): Salary!
 }
 
@@ -19,16 +72,44 @@ type Query {
 }
 
 type Salary {
+  _count: SalaryCount!
   createdAt: DateTime!
   currencyId: Int!
   from: Decimal!
   id: ID!
+  job: [Job!]
   to: Decimal!
   updatedAt: DateTime!
+}
+
+type SalaryCount {
+  job: Int!
 }
 
 input SalaryCreateInput {
   currencyId: Int!
   from: Decimal!
+  job: JobCreateNestedManyWithoutSalaryInput
   to: Decimal!
+}
+
+input SalaryCreateNestedOneWithoutJobInput {
+  connect: SalaryWhereUniqueInput
+  connectOrCreate: SalaryCreateOrConnectWithoutJobInput
+  create: SalaryCreateWithoutJobInput
+}
+
+input SalaryCreateOrConnectWithoutJobInput {
+  create: SalaryCreateWithoutJobInput!
+  where: SalaryWhereUniqueInput!
+}
+
+input SalaryCreateWithoutJobInput {
+  currencyId: Int!
+  from: Decimal!
+  to: Decimal!
+}
+
+input SalaryWhereUniqueInput {
+  id: Int
 }

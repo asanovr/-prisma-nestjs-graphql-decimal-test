@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ArgsType } from '@nestjs/graphql';
 import { SalaryWhereInput } from './salary-where.input';
+import { Type } from 'class-transformer';
 import { SalaryOrderByWithRelationInput } from './salary-order-by-with-relation.input';
 import { SalaryWhereUniqueInput } from './salary-where-unique.input';
 import { Int } from '@nestjs/graphql';
@@ -14,6 +15,7 @@ import { SalaryMaxAggregateInput } from './salary-max-aggregate.input';
 export class SalaryAggregateArgs {
 
     @Field(() => SalaryWhereInput, {nullable:true})
+    @Type(() => SalaryWhereInput)
     where?: SalaryWhereInput;
 
     @Field(() => [SalaryOrderByWithRelationInput], {nullable:true})
