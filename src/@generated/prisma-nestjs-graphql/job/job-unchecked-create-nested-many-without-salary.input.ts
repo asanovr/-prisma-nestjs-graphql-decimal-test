@@ -18,6 +18,7 @@ export class JobUncheckedCreateNestedManyWithoutSalaryInput {
     connectOrCreate?: Array<JobCreateOrConnectWithoutSalaryInput>;
 
     @Field(() => JobCreateManySalaryInputEnvelope, {nullable:true})
+    @Type(() => JobCreateManySalaryInputEnvelope)
     createMany?: JobCreateManySalaryInputEnvelope;
 
     @Field(() => [JobWhereUniqueInput], {nullable:true})

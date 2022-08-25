@@ -10,6 +10,39 @@ scalar DateTime
 """An arbitrary-precision Decimal type"""
 scalar Decimal
 
+input DecimalFilter {
+  equals: Decimal
+  gt: Decimal
+  gte: Decimal
+  in: [Decimal!]
+  lt: Decimal
+  lte: Decimal
+  not: NestedDecimalFilter
+  notIn: [Decimal!]
+}
+
+type Employee {
+  id: ID!
+  salaryHistory: SalaryHistory
+  salaryHistoryId: String
+}
+
+input EmployeeUpdateInput {
+  id: String
+  salaryHistory: SalaryHistoryUpdateOneWithoutEmployeeSalaryHistoryNestedInput
+}
+
+input IntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
 type Job {
   companyId: Int!
   createdAt: DateTime!
@@ -65,6 +98,43 @@ input JobWhereUniqueInput {
 type Mutation {
   createJob(input: JobCreateInput!): Job!
   createSalary(input: SalaryCreateInput!): Salary!
+  updateEmployee(id: String!, input: EmployeeUpdateInput!): Employee!
+}
+
+input NestedDecimalFilter {
+  equals: Decimal
+  gt: Decimal
+  gte: Decimal
+  in: [Decimal!]
+  lt: Decimal
+  lte: Decimal
+  not: NestedDecimalFilter
+  notIn: [Decimal!]
+}
+
+input NestedIntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
 }
 
 type Query {
@@ -110,6 +180,173 @@ input SalaryCreateWithoutJobInput {
   to: Decimal!
 }
 
+type SalaryHistory {
+  _count: SalaryHistoryCount!
+  createdAt: DateTime!
+  currencyId: String!
+  employeeSalaryHistory: Employee
+  history: [SalaryHistoryRecord!]
+  id: ID!
+  updatedAt: DateTime!
+}
+
+type SalaryHistoryCount {
+  history: Int!
+}
+
+input SalaryHistoryCreateOrConnectWithoutEmployeeSalaryHistoryInput {
+  create: SalaryHistoryCreateWithoutEmployeeSalaryHistoryInput!
+  where: SalaryHistoryWhereUniqueInput!
+}
+
+input SalaryHistoryCreateWithoutEmployeeSalaryHistoryInput {
+  createdAt: DateTime
+  currencyId: String!
+  history: SalaryHistoryRecordCreateNestedManyWithoutSalaryHistoryInput
+  id: String
+  updatedAt: DateTime
+}
+
+type SalaryHistoryRecord {
+  from: Decimal!
+  id: ID!
+  salaryHistory: SalaryHistory!
+  salaryHistoryId: String!
+  to: Decimal!
+  year: Int!
+}
+
+input SalaryHistoryRecordCreateManySalaryHistoryInput {
+  from: Decimal!
+  id: String
+  to: Decimal!
+  year: Int!
+}
+
+input SalaryHistoryRecordCreateManySalaryHistoryInputEnvelope {
+  data: [SalaryHistoryRecordCreateManySalaryHistoryInput!]!
+  skipDuplicates: Boolean
+}
+
+input SalaryHistoryRecordCreateNestedManyWithoutSalaryHistoryInput {
+  connect: [SalaryHistoryRecordWhereUniqueInput!]
+  connectOrCreate: [SalaryHistoryRecordCreateOrConnectWithoutSalaryHistoryInput!]
+  create: [SalaryHistoryRecordCreateWithoutSalaryHistoryInput!]
+  createMany: SalaryHistoryRecordCreateManySalaryHistoryInputEnvelope
+}
+
+input SalaryHistoryRecordCreateOrConnectWithoutSalaryHistoryInput {
+  create: SalaryHistoryRecordCreateWithoutSalaryHistoryInput!
+  where: SalaryHistoryRecordWhereUniqueInput!
+}
+
+input SalaryHistoryRecordCreateWithoutSalaryHistoryInput {
+  from: Decimal!
+  id: String
+  to: Decimal!
+  year: Int!
+}
+
+input SalaryHistoryRecordScalarWhereInput {
+  AND: [SalaryHistoryRecordScalarWhereInput!]
+  NOT: [SalaryHistoryRecordScalarWhereInput!]
+  OR: [SalaryHistoryRecordScalarWhereInput!]
+  from: DecimalFilter
+  id: StringFilter
+  salaryHistoryId: StringFilter
+  to: DecimalFilter
+  year: IntFilter
+}
+
+input SalaryHistoryRecordUpdateManyMutationInput {
+  from: Decimal
+  id: String
+  to: Decimal
+  year: Int
+}
+
+input SalaryHistoryRecordUpdateManyWithWhereWithoutSalaryHistoryInput {
+  data: SalaryHistoryRecordUpdateManyMutationInput!
+  where: SalaryHistoryRecordScalarWhereInput!
+}
+
+input SalaryHistoryRecordUpdateManyWithoutSalaryHistoryNestedInput {
+  connect: [SalaryHistoryRecordWhereUniqueInput!]
+  connectOrCreate: [SalaryHistoryRecordCreateOrConnectWithoutSalaryHistoryInput!]
+  create: [SalaryHistoryRecordCreateWithoutSalaryHistoryInput!]
+  createMany: SalaryHistoryRecordCreateManySalaryHistoryInputEnvelope
+  delete: [SalaryHistoryRecordWhereUniqueInput!]
+  deleteMany: [SalaryHistoryRecordScalarWhereInput!]
+  disconnect: [SalaryHistoryRecordWhereUniqueInput!]
+  set: [SalaryHistoryRecordWhereUniqueInput!]
+  update: [SalaryHistoryRecordUpdateWithWhereUniqueWithoutSalaryHistoryInput!]
+  updateMany: [SalaryHistoryRecordUpdateManyWithWhereWithoutSalaryHistoryInput!]
+  upsert: [SalaryHistoryRecordUpsertWithWhereUniqueWithoutSalaryHistoryInput!]
+}
+
+input SalaryHistoryRecordUpdateWithWhereUniqueWithoutSalaryHistoryInput {
+  data: SalaryHistoryRecordUpdateWithoutSalaryHistoryInput!
+  where: SalaryHistoryRecordWhereUniqueInput!
+}
+
+input SalaryHistoryRecordUpdateWithoutSalaryHistoryInput {
+  from: Decimal
+  id: String
+  to: Decimal
+  year: Int
+}
+
+input SalaryHistoryRecordUpsertWithWhereUniqueWithoutSalaryHistoryInput {
+  create: SalaryHistoryRecordCreateWithoutSalaryHistoryInput!
+  update: SalaryHistoryRecordUpdateWithoutSalaryHistoryInput!
+  where: SalaryHistoryRecordWhereUniqueInput!
+}
+
+input SalaryHistoryRecordWhereUniqueInput {
+  id: String
+}
+
+input SalaryHistoryUpdateOneWithoutEmployeeSalaryHistoryNestedInput {
+  connect: SalaryHistoryWhereUniqueInput
+  connectOrCreate: SalaryHistoryCreateOrConnectWithoutEmployeeSalaryHistoryInput
+  create: SalaryHistoryCreateWithoutEmployeeSalaryHistoryInput
+  delete: Boolean
+  disconnect: Boolean
+  update: SalaryHistoryUpdateWithoutEmployeeSalaryHistoryInput
+  upsert: SalaryHistoryUpsertWithoutEmployeeSalaryHistoryInput
+}
+
+input SalaryHistoryUpdateWithoutEmployeeSalaryHistoryInput {
+  createdAt: DateTime
+  currencyId: String
+  history: SalaryHistoryRecordUpdateManyWithoutSalaryHistoryNestedInput
+  id: String
+  updatedAt: DateTime
+}
+
+input SalaryHistoryUpsertWithoutEmployeeSalaryHistoryInput {
+  create: SalaryHistoryCreateWithoutEmployeeSalaryHistoryInput!
+  update: SalaryHistoryUpdateWithoutEmployeeSalaryHistoryInput!
+}
+
+input SalaryHistoryWhereUniqueInput {
+  id: String
+}
+
 input SalaryWhereUniqueInput {
   id: Int
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
 }

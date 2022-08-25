@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { HideField } from '@nestjs/graphql';
 import { SalaryCreateNestedOneWithoutJobInput } from '../salary/salary-create-nested-one-without-job.input';
+import { Type } from 'class-transformer';
 
 @InputType()
 export class JobCreateInput {
@@ -23,5 +24,6 @@ export class JobCreateInput {
     updatedAt?: Date | string;
 
     @Field(() => SalaryCreateNestedOneWithoutJobInput, {nullable:true})
+    @Type(() => SalaryCreateNestedOneWithoutJobInput)
     salary?: SalaryCreateNestedOneWithoutJobInput;
 }

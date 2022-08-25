@@ -7,6 +7,7 @@ import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
 import { HideField } from '@nestjs/graphql';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { SalaryRelationFilter } from '../salary/salary-relation-filter.input';
+import { Type } from 'class-transformer';
 
 @InputType()
 export class JobWhereInput {
@@ -42,5 +43,6 @@ export class JobWhereInput {
     updatedAt?: DateTimeFilter;
 
     @Field(() => SalaryRelationFilter, {nullable:true})
+    @Type(() => SalaryRelationFilter)
     salary?: SalaryRelationFilter;
 }

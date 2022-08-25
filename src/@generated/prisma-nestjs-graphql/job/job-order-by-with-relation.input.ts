@@ -3,6 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { SortOrder } from '../prisma/sort-order.enum';
 import { HideField } from '@nestjs/graphql';
 import { SalaryOrderByWithRelationInput } from '../salary/salary-order-by-with-relation.input';
+import { Type } from 'class-transformer';
 
 @InputType()
 export class JobOrderByWithRelationInput {
@@ -29,5 +30,6 @@ export class JobOrderByWithRelationInput {
     updatedAt?: keyof typeof SortOrder;
 
     @Field(() => SalaryOrderByWithRelationInput, {nullable:true})
+    @Type(() => SalaryOrderByWithRelationInput)
     salary?: SalaryOrderByWithRelationInput;
 }

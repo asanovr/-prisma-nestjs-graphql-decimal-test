@@ -1,8 +1,8 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
+import { Type } from 'class-transformer';
 import { IntWithAggregatesFilter } from '../prisma/int-with-aggregates-filter.input';
 import { DecimalWithAggregatesFilter } from '../prisma/decimal-with-aggregates-filter.input';
-import { Type } from 'class-transformer';
 import { DateTimeWithAggregatesFilter } from '../prisma/date-time-with-aggregates-filter.input';
 import { HideField } from '@nestjs/graphql';
 
@@ -10,12 +10,15 @@ import { HideField } from '@nestjs/graphql';
 export class SalaryScalarWhereWithAggregatesInput {
 
     @Field(() => [SalaryScalarWhereWithAggregatesInput], {nullable:true})
+    @Type(() => SalaryScalarWhereWithAggregatesInput)
     AND?: Array<SalaryScalarWhereWithAggregatesInput>;
 
     @Field(() => [SalaryScalarWhereWithAggregatesInput], {nullable:true})
+    @Type(() => SalaryScalarWhereWithAggregatesInput)
     OR?: Array<SalaryScalarWhereWithAggregatesInput>;
 
     @Field(() => [SalaryScalarWhereWithAggregatesInput], {nullable:true})
+    @Type(() => SalaryScalarWhereWithAggregatesInput)
     NOT?: Array<SalaryScalarWhereWithAggregatesInput>;
 
     @Field(() => IntWithAggregatesFilter, {nullable:true})

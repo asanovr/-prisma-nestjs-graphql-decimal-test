@@ -2,7 +2,8 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 import { HideField } from '@nestjs/graphql';
-import { SalaryUpdateOneWithoutJobInput } from '../salary/salary-update-one-without-job.input';
+import { SalaryUpdateOneWithoutJobNestedInput } from '../salary/salary-update-one-without-job-nested.input';
+import { Type } from 'class-transformer';
 
 @InputType()
 export class JobUpdateInput {
@@ -22,6 +23,7 @@ export class JobUpdateInput {
     @HideField()
     updatedAt?: Date | string;
 
-    @Field(() => SalaryUpdateOneWithoutJobInput, {nullable:true})
-    salary?: SalaryUpdateOneWithoutJobInput;
+    @Field(() => SalaryUpdateOneWithoutJobNestedInput, {nullable:true})
+    @Type(() => SalaryUpdateOneWithoutJobNestedInput)
+    salary?: SalaryUpdateOneWithoutJobNestedInput;
 }

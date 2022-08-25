@@ -7,7 +7,7 @@ import { transformToDecimal } from 'prisma-graphql-type-decimal';
 import { Transform } from 'class-transformer';
 import { Type } from 'class-transformer';
 import { HideField } from '@nestjs/graphql';
-import { JobUncheckedUpdateManyWithoutSalaryInput } from '../job/job-unchecked-update-many-without-salary.input';
+import { JobUncheckedUpdateManyWithoutSalaryNestedInput } from '../job/job-unchecked-update-many-without-salary-nested.input';
 
 @InputType()
 export class SalaryUncheckedUpdateInput {
@@ -34,6 +34,6 @@ export class SalaryUncheckedUpdateInput {
     @HideField()
     updatedAt?: Date | string;
 
-    @Field(() => JobUncheckedUpdateManyWithoutSalaryInput, {nullable:true})
-    job?: JobUncheckedUpdateManyWithoutSalaryInput;
+    @Field(() => JobUncheckedUpdateManyWithoutSalaryNestedInput, {nullable:true})
+    job?: JobUncheckedUpdateManyWithoutSalaryNestedInput;
 }

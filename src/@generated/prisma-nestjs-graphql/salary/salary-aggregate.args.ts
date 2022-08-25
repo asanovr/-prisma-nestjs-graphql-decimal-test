@@ -19,9 +19,11 @@ export class SalaryAggregateArgs {
     where?: SalaryWhereInput;
 
     @Field(() => [SalaryOrderByWithRelationInput], {nullable:true})
+    @Type(() => SalaryOrderByWithRelationInput)
     orderBy?: Array<SalaryOrderByWithRelationInput>;
 
     @Field(() => SalaryWhereUniqueInput, {nullable:true})
+    @Type(() => SalaryWhereUniqueInput)
     cursor?: SalaryWhereUniqueInput;
 
     @Field(() => Int, {nullable:true})
@@ -31,17 +33,22 @@ export class SalaryAggregateArgs {
     skip?: number;
 
     @Field(() => SalaryCountAggregateInput, {nullable:true})
+    @Type(() => SalaryCountAggregateInput)
     _count?: SalaryCountAggregateInput;
 
     @Field(() => SalaryAvgAggregateInput, {nullable:true})
+    @Type(() => SalaryAvgAggregateInput)
     _avg?: SalaryAvgAggregateInput;
 
     @Field(() => SalarySumAggregateInput, {nullable:true})
+    @Type(() => SalarySumAggregateInput)
     _sum?: SalarySumAggregateInput;
 
     @Field(() => SalaryMinAggregateInput, {nullable:true})
+    @Type(() => SalaryMinAggregateInput)
     _min?: SalaryMinAggregateInput;
 
     @Field(() => SalaryMaxAggregateInput, {nullable:true})
+    @Type(() => SalaryMaxAggregateInput)
     _max?: SalaryMaxAggregateInput;
 }

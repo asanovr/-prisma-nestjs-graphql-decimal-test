@@ -8,7 +8,7 @@ import { SalaryWhereUniqueInput } from './salary-where-unique.input';
 import { SalaryUpdateWithoutJobInput } from './salary-update-without-job.input';
 
 @InputType()
-export class SalaryUpdateOneWithoutJobInput {
+export class SalaryUpdateOneWithoutJobNestedInput {
 
     @Field(() => SalaryCreateWithoutJobInput, {nullable:true})
     @Type(() => SalaryCreateWithoutJobInput)

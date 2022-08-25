@@ -15,9 +15,11 @@ export class FindManySalaryArgs {
     where?: SalaryWhereInput;
 
     @Field(() => [SalaryOrderByWithRelationInput], {nullable:true})
+    @Type(() => SalaryOrderByWithRelationInput)
     orderBy?: Array<SalaryOrderByWithRelationInput>;
 
     @Field(() => SalaryWhereUniqueInput, {nullable:true})
+    @Type(() => SalaryWhereUniqueInput)
     cursor?: SalaryWhereUniqueInput;
 
     @Field(() => Int, {nullable:true})

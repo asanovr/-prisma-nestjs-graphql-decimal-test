@@ -11,7 +11,7 @@ import { JobUpdateManyWithWhereWithoutSalaryInput } from './job-update-many-with
 import { JobScalarWhereInput } from './job-scalar-where.input';
 
 @InputType()
-export class JobUncheckedUpdateManyWithoutSalaryInput {
+export class JobUncheckedUpdateManyWithoutSalaryNestedInput {
 
     @Field(() => [JobCreateWithoutSalaryInput], {nullable:true})
     @Type(() => JobCreateWithoutSalaryInput)
@@ -26,6 +26,7 @@ export class JobUncheckedUpdateManyWithoutSalaryInput {
     upsert?: Array<JobUpsertWithWhereUniqueWithoutSalaryInput>;
 
     @Field(() => JobCreateManySalaryInputEnvelope, {nullable:true})
+    @Type(() => JobCreateManySalaryInputEnvelope)
     createMany?: JobCreateManySalaryInputEnvelope;
 
     @Field(() => [JobWhereUniqueInput], {nullable:true})

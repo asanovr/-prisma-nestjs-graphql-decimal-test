@@ -20,12 +20,14 @@ export class SalaryGroupByArgs {
     where?: SalaryWhereInput;
 
     @Field(() => [SalaryOrderByWithAggregationInput], {nullable:true})
+    @Type(() => SalaryOrderByWithAggregationInput)
     orderBy?: Array<SalaryOrderByWithAggregationInput>;
 
     @Field(() => [SalaryScalarFieldEnum], {nullable:false})
     by!: Array<keyof typeof SalaryScalarFieldEnum>;
 
     @Field(() => SalaryScalarWhereWithAggregatesInput, {nullable:true})
+    @Type(() => SalaryScalarWhereWithAggregatesInput)
     having?: SalaryScalarWhereWithAggregatesInput;
 
     @Field(() => Int, {nullable:true})
@@ -35,17 +37,22 @@ export class SalaryGroupByArgs {
     skip?: number;
 
     @Field(() => SalaryCountAggregateInput, {nullable:true})
+    @Type(() => SalaryCountAggregateInput)
     _count?: SalaryCountAggregateInput;
 
     @Field(() => SalaryAvgAggregateInput, {nullable:true})
+    @Type(() => SalaryAvgAggregateInput)
     _avg?: SalaryAvgAggregateInput;
 
     @Field(() => SalarySumAggregateInput, {nullable:true})
+    @Type(() => SalarySumAggregateInput)
     _sum?: SalarySumAggregateInput;
 
     @Field(() => SalaryMinAggregateInput, {nullable:true})
+    @Type(() => SalaryMinAggregateInput)
     _min?: SalaryMinAggregateInput;
 
     @Field(() => SalaryMaxAggregateInput, {nullable:true})
+    @Type(() => SalaryMaxAggregateInput)
     _max?: SalaryMaxAggregateInput;
 }

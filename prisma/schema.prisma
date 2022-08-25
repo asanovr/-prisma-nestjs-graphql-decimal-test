@@ -38,7 +38,6 @@ model Job {
 
   salary Salary? @relation(fields: [salaryId], references: [id], onDelete: Cascade)
 
-
   @@map("jobs")
 }
 
@@ -57,4 +56,36 @@ model Salary {
   job Job[]
 
   @@map("salaries")
+}
+
+model Employee {
+  id              String         @id @default(cuid())
+  salaryHistoryId String?        @unique
+  salaryHistory   SalaryHistory? @relation(name: "employeeSalaryHistory", fields: [salaryHistoryId], references: [id], onDelete: SetNull)
+
+  @@map("employees")
+}
+
+model SalaryHistory {
+  id         String   @id @default(cuid())
+  currencyId String   @db.Char(3)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  history               SalaryHistoryRecord[]
+  employeeSalaryHistory Employee?             @relation(name: "employeeSalaryHistory")
+
+  @@map("salary_history")
+}
+
+model SalaryHistoryRecord {
+  id              String  @id @default(cuid())
+  salaryHistoryId String
+  year            Int     @db.SmallInt
+  from            Decimal @db.Decimal(15, 2)
+  to              Decimal @db.Decimal(15, 2)
+
+  salaryHistory SalaryHistory @relation(fields: [salaryHistoryId], references: [id], onDelete: Cascade)
+
+  @@map("salary_history_record")
 }
